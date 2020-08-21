@@ -94,7 +94,7 @@ following contents to get you up and running quickly.</p>
   preparers.register(<span class="hljs-string">'file'</span>, filePreparer);
   preparers.register(<span class="hljs-string">'github'</span>, githubPreparer);
 
-  <span class="hljs-comment">// Create Github client with your access token from environment variables</span>
+  <span class="hljs-comment">// Create GitHub client with your access token from environment variables</span>
   <span class="hljs-keyword">const</span> githubClient = <span class="hljs-keyword">new</span> Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
   <span class="hljs-keyword">const</span> publisher = <span class="hljs-keyword">new</span> GithubPublisher({ client: githubClient });
 
