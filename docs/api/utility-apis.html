@@ -117,18 +117,23 @@ the <code>ErrorApi</code> inside an app:</p>
   AlertApiForwarder,
   ErrorApiForwarder,
   ErrorAlerter,
+  ConfigApi
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@backstage/core'</span>;
 
-<span class="hljs-keyword">const</span> builder = ApiRegistry.builder();
 
-<span class="hljs-comment">// The alert API is a self-contained implementation that shows alerts to the user.</span>
-<span class="hljs-keyword">const</span> alertApi = builder.add(alertApiRef, <span class="hljs-keyword">new</span> AlertApiForwarder());
+<span class="hljs-keyword">const</span> apis = <span class="hljs-function">(<span class="hljs-params">config: ConfigApi</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> builder = ApiRegistry.builder();
 
-<span class="hljs-comment">// The error API uses the alert API to send error notifications to the user.</span>
-builder.add(errorApiRef, <span class="hljs-keyword">new</span> ErrorAlerter(alertApi, <span class="hljs-keyword">new</span> ErrorApiForwarder()));
+  <span class="hljs-comment">// The alert API is a self-contained implementation that shows alerts to the user.</span>
+  <span class="hljs-keyword">const</span> alertApi = builder.add(alertApiRef, <span class="hljs-keyword">new</span> AlertApiForwarder());
+
+  <span class="hljs-comment">// The error API uses the alert API to send error notifications to the user.</span>
+  builder.add(errorApiRef, <span class="hljs-keyword">new</span> ErrorAlerter(alertApi, <span class="hljs-keyword">new</span> ErrorApiForwarder()));
+  <span class="hljs-keyword">return</span> builder.build();
+}
 
 <span class="hljs-keyword">const</span> app = createApp({
-  apis: apiBuilder.build(),
+  apis,
   <span class="hljs-comment">// ... other config</span>
 });
 </code></pre>
