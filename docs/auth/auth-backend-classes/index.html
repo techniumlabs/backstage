@@ -79,7 +79,7 @@ to the documentation <a href="/docs/auth/oauth">here</a>.</p>
 refer to the type documentation under
 <code>plugins/auth-backend/src/providers/types.ts</code>.</p>
 <p>There are currently two different classes for two authentication mechanisms that
-implement this interface: an <code>OAuthProvider</code> for <a href="https://oauth.net/2/">OAuth</a>
+implement this interface: an <code>OAuthAdapter</code> for <a href="https://oauth.net/2/">OAuth</a>
 based mechanisms and a <code>SAMLAuthProvider</code> for
 <a href="http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0.html">SAML</a>
 based mechanisms.</p>
@@ -96,62 +96,64 @@ OAuth2) providers, you can configure them by setting the right variables in
 <p>Each authentication provider (except SAML) needs five parameters: an OAuth
 client ID, a client secret, an authorization endpoint and a token endpoint, and
 an app origin. The app origin is the URL at which the frontend of the
-application is hosted. This is required because the application opens a popup
-window to perform the authentication, and once the flow is completed, the popup
-window sends a <code>postMessage</code> to the frontend application to indicate the result
-of the operation. Also this URL is used to verify that authentication requests
-are coming from only this endpoint.</p>
+application is hosted, and it is read from the <code>app.baseUrl</code> config. This is
+required because the application opens a popup window to perform the
+authentication, and once the flow is completed, the popup window sends a
+<code>postMessage</code> to the frontend application to indicate the result of the
+operation. Also this URL is used to verify that authentication requests are
+coming from only this endpoint.</p>
 <p>These values are configured via the <code>app-config.yaml</code> present in the root of
 your app folder.</p>
-<pre><code class="hljs"><span class="hljs-attr">auth:</span>
-  <span class="hljs-attr">providers:</span>
-    <span class="hljs-attr">google:</span>
-      <span class="hljs-attr">development:</span>
-        <span class="hljs-attr">appOrigin:</span> <span class="hljs-string">"http://localhost:3000/"</span>
-        <span class="hljs-attr">secure:</span> <span class="hljs-literal">false</span>
-        <span class="hljs-attr">clientId:</span>
-          <span class="hljs-string">$secret:</span>
-            <span class="hljs-attr">env:</span> <span class="hljs-string">AUTH_GOOGLE_CLIENT_ID</span>
-        <span class="hljs-attr">clientSecret:</span>
-          <span class="hljs-string">$secret:</span>
-            <span class="hljs-attr">env:</span> <span class="hljs-string">AUTH_GOOGLE_CLIENT_SECRET</span>
-    <span class="hljs-attr">github:</span>
-      <span class="hljs-attr">development:</span>
-        <span class="hljs-attr">appOrigin:</span> <span class="hljs-string">"http://localhost:3000/"</span>
-        <span class="hljs-attr">secure:</span> <span class="hljs-literal">false</span>
-        <span class="hljs-attr">clientId:</span>
-          <span class="hljs-string">$secret:</span>
-            <span class="hljs-attr">env:</span> <span class="hljs-string">AUTH_GITHUB_CLIENT_ID</span>
-        <span class="hljs-attr">clientSecret:</span>
-          <span class="hljs-string">$secret:</span>
-            <span class="hljs-attr">env:</span> <span class="hljs-string">AUTH_GITHUB_CLIENT_SECRET</span>
-        <span class="hljs-attr">enterpriseInstanceUrl:</span>
-          <span class="hljs-string">$secret:</span>
-            <span class="hljs-attr">env:</span> <span class="hljs-string">AUTH_GITHUB_ENTERPRISE_INSTANCE_URL</span>
-    <span class="hljs-attr">gitlab:</span>
-      <span class="hljs-attr">development:</span>
-        <span class="hljs-attr">appOrigin:</span> <span class="hljs-string">"http://localhost:3000/"</span>
-        <span class="hljs-attr">secure:</span> <span class="hljs-literal">false</span>
-        <span class="hljs-attr">clientId:</span>
-          <span class="hljs-string">$secret:</span>
-            <span class="hljs-string">...</span>
+<pre><code class="hljs">auth:
+  provider<span class="hljs-variable">s:</span>
+    google:
+      developmen<span class="hljs-variable">t:</span>
+        clientId:
+          $secre<span class="hljs-variable">t:</span>
+            <span class="hljs-keyword">en</span><span class="hljs-variable">v:</span> AUTH_GOOGLE_CLIENT_ID
+        clientSecre<span class="hljs-variable">t:</span>
+          $secre<span class="hljs-variable">t:</span>
+            <span class="hljs-keyword">en</span><span class="hljs-variable">v:</span> AUTH_GOOGLE_CLIENT_SECRET
+    githu<span class="hljs-variable">b:</span>
+      developmen<span class="hljs-variable">t:</span>
+        clientId:
+          $secre<span class="hljs-variable">t:</span>
+            <span class="hljs-keyword">en</span><span class="hljs-variable">v:</span> AUTH_GITHUB_CLIENT_ID
+        clientSecre<span class="hljs-variable">t:</span>
+          $secre<span class="hljs-variable">t:</span>
+            <span class="hljs-keyword">en</span><span class="hljs-variable">v:</span> AUTH_GITHUB_CLIENT_SECRET
+        enterpriseInstanceUr<span class="hljs-variable">l:</span>
+          $secre<span class="hljs-variable">t:</span>
+            <span class="hljs-keyword">en</span><span class="hljs-variable">v:</span> AUTH_GITHUB_ENTERPRISE_INSTANCE_URL
+    gitla<span class="hljs-variable">b:</span>
+      developmen<span class="hljs-variable">t:</span>
+        clientId:
+          $secre<span class="hljs-variable">t:</span>
+            ...
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="technical-notes"></a><a href="#technical-notes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Technical Notes</h2>
-<h3><a class="anchor" aria-hidden="true" id="environmenthandler"></a><a href="#environmenthandler" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>EnvironmentHandler</h3>
+<h3><a class="anchor" aria-hidden="true" id="oauthenvironmenthandler"></a><a href="#oauthenvironmenthandler" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OAuthEnvironmentHandler</h3>
 <p>The concept of an &quot;env&quot; is core to the way the auth backend works. It uses an
 <code>env</code> query parameter to identify the environment in which the application is
 running (<code>development</code>, <code>staging</code>, <code>production</code>, etc). Each runtime can support
 multiple environments at the same time and the right handler for each request is
 identified and dispatched to based on the <code>env</code> parameter. All
-<code>AuthProviderRouteHandlers</code> are wrapped within an <code>EnvironmentHandler</code>.</p>
-<p>An <code>EnvironmentHandler</code> takes an ID for each provider that it wraps, the
-handlers for each env the provider is supported in, and a function that, given a
-<code>Request</code> as argument, can extract the information about the env under which it
-should be processed.</p>
-<p>Each provider exposes a factory function <code>createXProvider</code> (where X is the name
-of the provider) that takes the global config, env and other parameters and
-returns an <code>AuthProviderRouteHandlers</code> for each env, and an <code>envIdentifier</code>
-function to identify the env of a request.</p>
+<code>AuthProviderRouteHandlers</code> are wrapped within an <code>OAuthEnvironmentHandler</code>.</p>
+<p>To instantiate multiple OAuth providers for different environments, use
+<code>OAuthEnvironmentHandler.mapConfig</code>. It's a helper to iterate over a
+configuration object that is a map of environment to configurations. See one of
+the existing OAuth providers for an example of how it is used.</p>
+<p>Given the following configuration:</p>
+<pre><code class="hljs css language-yaml"><span class="hljs-attr">development:</span>
+  <span class="hljs-attr">clientId:</span> <span class="hljs-string">abc</span>
+  <span class="hljs-attr">clientSecret:</span> <span class="hljs-string">secret</span>
+<span class="hljs-attr">production:</span>
+  <span class="hljs-attr">clientId:</span> <span class="hljs-string">xyz</span>
+  <span class="hljs-attr">clientSecret:</span> <span class="hljs-string">supersecret</span>
+</code></pre>
+<p>The <code>OAuthEnvironmentHandler.mapConfig(config, envConfig =&gt; ...)</code> call will
+split the <code>config</code> by the top level <code>development</code> and <code>production</code> keys, and
+pass on each block as <code>envConfig</code>.</p>
 <p>For a list of currently available providers, look in the <code>factories</code> module
 located in <code>plugins/auth-backend/src/providers/factories.ts</code></p>
 <h3><a class="anchor" aria-hidden="true" id="oauth2-provider"></a><a href="#oauth2-provider" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OAuth2 provider</h3>
@@ -160,7 +162,7 @@ provider. What this means is that after the application has been given
 permission by the user, the <code>authorization code</code> will be exchanged for an
 <code>access_token</code>, a <code>refresh_token</code> and an <code>id_token</code>. This <code>id_token</code> is used to
 obtain an email id of the user, which is then used for creating the session.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/auth/glossary"><span class="arrow-prev">← </span><span>Glossary</span></a><a class="docs-next button" href="/docs/dls/design"><span>Design</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#how-does-authentication-work">How Does Authentication Work?</a><ul class="toc-headings"><li><a href="#oauth-mechanisms">OAuth mechanisms</a></li><li><a href="#configuration">Configuration</a></li></ul></li><li><a href="#technical-notes">Technical Notes</a><ul class="toc-headings"><li><a href="#environmenthandler">EnvironmentHandler</a></li><li><a href="#oauth2-provider">OAuth2 provider</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Service Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/spotify/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://github.com/spotify/backstage">GitHub</a><a class="github-button" href="https://github.com/spotify/backstage" data-icon="octicon-star" data-count-href="/spotify/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><a href="https://spotify.github.io/" target="_blank" rel="noreferrer noopener" class="spotifyOpenSource">Made with <span>❤</span> at Spotify</a><p class="copyright">Copyright © 2020 Spotify AB</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/auth/glossary"><span class="arrow-prev">← </span><span>Glossary</span></a><a class="docs-next button" href="/docs/dls/design"><span>Design</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#how-does-authentication-work">How Does Authentication Work?</a><ul class="toc-headings"><li><a href="#oauth-mechanisms">OAuth mechanisms</a></li><li><a href="#configuration">Configuration</a></li></ul></li><li><a href="#technical-notes">Technical Notes</a><ul class="toc-headings"><li><a href="#oauthenvironmenthandler">OAuthEnvironmentHandler</a></li><li><a href="#oauth2-provider">OAuth2 provider</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Service Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/spotify/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://github.com/spotify/backstage">GitHub</a><a class="github-button" href="https://github.com/spotify/backstage" data-icon="octicon-star" data-count-href="/spotify/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><a href="https://spotify.github.io/" target="_blank" rel="noreferrer noopener" class="spotifyOpenSource">Made with <span>❤</span> at Spotify</a><p class="copyright">Copyright © 2020 Spotify AB</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
