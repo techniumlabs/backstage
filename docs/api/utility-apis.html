@@ -117,9 +117,8 @@ the <code>ErrorApi</code> inside an app:</p>
   AlertApiForwarder,
   ErrorApiForwarder,
   ErrorAlerter,
-  ConfigApi
+  ConfigApi,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'@backstage/core'</span>;
-
 
 <span class="hljs-keyword">const</span> apis = <span class="hljs-function">(<span class="hljs-params">config: ConfigApi</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> builder = ApiRegistry.builder();
@@ -130,7 +129,7 @@ the <code>ErrorApi</code> inside an app:</p>
   <span class="hljs-comment">// The error API uses the alert API to send error notifications to the user.</span>
   builder.add(errorApiRef, <span class="hljs-keyword">new</span> ErrorAlerter(alertApi, <span class="hljs-keyword">new</span> ErrorApiForwarder()));
   <span class="hljs-keyword">return</span> builder.build();
-}
+};
 
 <span class="hljs-keyword">const</span> app = createApp({
   apis,
