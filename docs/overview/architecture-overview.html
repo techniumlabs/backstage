@@ -183,16 +183,14 @@ separate docker images.</p>
 <p>The frontend container can be built with a provided command.</p>
 <pre><code class="hljs css language-bash">yarn install
 yarn tsc
-yarn build
-yarn run docker-build
+yarn run docker-build:app
 </code></pre>
 <p>Running this will simply generate a Docker container containing the contents of
-the UIs <code>dist</code> directory. The resulting container will be about 50MB in size.</p>
-<p>The backend container can be built by running the following command in the
-<code>packages/backend</code> directory.</p>
-<pre><code class="hljs css language-bash">yarn run build-image
+the UIs <code>dist</code> directory.</p>
+<p>The backend container can be built by running the following command:</p>
+<pre><code class="hljs css language-bash">yarn run docker-build
 </code></pre>
-<p>This will create a ~500MB container called <code>example-backend</code>.</p>
+<p>This will create a container called <code>example-backend</code>.</p>
 <p>The lighthouse-audit-service container is already publicly available in Docker
 Hub and can be downloaded and ran with</p>
 <pre><code class="hljs css language-bash">docker run spotify/lighthouse-audit-service:latest
