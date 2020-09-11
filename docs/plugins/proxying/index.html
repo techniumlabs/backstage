@@ -98,7 +98,10 @@ configuration will lead to the proxy acting on backend requests to
 <code>/proxy/simple-example/...</code> and <code>/proxy/larger-example/v1/...</code>.</p>
 <p>The value inside each route is either a simple URL string, or an object on the
 format accepted by
-<a href="https://www.npmjs.com/package/http-proxy-middleware">http-proxy-middleware</a>.</p>
+<a href="https://www.npmjs.com/package/http-proxy-middleware">http-proxy-middleware</a>. It
+is also possible to limit the forwarded HTTP methods with the configuration
+<code>allowedMethods</code>, for example <code>allowedMethods: ['GET']</code> to enforce read-only
+access.</p>
 <p>If the value is a string, it is assumed to correspond to:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">target:</span> <span class="hljs-string">&lt;the</span> <span class="hljs-string">string&gt;</span>
 <span class="hljs-attr">changeOrigin:</span> <span class="hljs-literal">true</span>
