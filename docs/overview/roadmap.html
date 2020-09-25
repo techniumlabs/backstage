@@ -82,10 +82,11 @@ consistent experience between tools.</p></li>
 (<a href="https://backstage.io/blog/2020/06/22/backstage-service-catalog-alpha">alpha released</a>) -
 With a single catalog, Backstage makes it easy for a team to manage ten
 services — and makes it possible for your company to manage thousands of them.</p></li>
-<li><p>🐇 <strong>Phase 3:</strong> Ecosystem (later) - Everyone's infrastructure stack is
-different. By fostering a vibrant community of contributors we hope to provide
-an ecosystem of Open Source plugins/integrations that allows you to pick the
-tools that match your stack.</p></li>
+<li><p>🐇 <strong>Phase 3:</strong> Ecosystem (ongoing, see
+<a href="https://backstage.io/plugins">Plugin Marketplace</a>) - Everyone's
+infrastructure stack is different. By fostering a vibrant community of
+contributors we hope to provide an ecosystem of Open Source
+plugins/integrations that allows you to pick the tools that match your stack.</p></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="detailed-roadmap"></a><a href="#detailed-roadmap" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Detailed roadmap</h2>
 <p>If you have questions about the roadmap or want to provide feedback, we would
@@ -104,20 +105,20 @@ and Docs) that will demonstrate how a user can manage a micro service and
 follow a change all the way out in production. Completing this work will make
 it much easier to see how a plugin can be built that integrates with the
 Backstage Service Catalog.</p></li>
+<li><p><strong><a href="https://github.com/spotify/backstage/milestone/20">Kubernetes support</a></strong> -
+Native support for Kubernetes, making it easier for developers to see and
+manage their services running in k8s.</p></li>
+<li><p><strong><a href="https://github.com/spotify/backstage/issues/2540">Helm charts</a></strong> - Provide
+Helm charts for easy deployments of Backstage and its subsystems on
+Kubernetes.</p></li>
+<li><p><strong><a href="https://github.com/spotify/backstage/milestone/19">Backstage platform is stable</a></strong> -
+The platform APIs and features are stable and can be depended on for
+production use. After this plugins will require little to no maintenance.</p></li>
 <li><p><strong>Backstage Design System</strong> - By providing design guidelines for common plugin
 layouts together, rich set of reusable UI components
 (<a href="https://backstage.io/storybook">Storybook</a>) and Figma design resources. The
 Design System will make it easy to design and build plugins that are
 consistent across the platform -- supporting both developers and designers.</p></li>
-<li><p><strong><a href="https://github.com/spotify/backstage/milestone/16">TechDocs v1</a></strong> - Our
-docs-like-code feature TechDocs working end to end.</p></li>
-<li><p><strong><a href="https://github.com/spotify/backstage/milestone/13">Initial GraphQL API</a></strong> -
-A GraphQL API will open up the rich metadata provided by Backstage in a single
-query. Plugins can easily query this API as well as extend the model where
-needed.</p></li>
-<li><p><strong>Production deployments</strong> - Provide instructions and default configurations
-(e.g. through Helm charts) for easy deployments of Backstage and its
-subsystems on Kubernetes.</p></li>
 <li><p><strong>Cloud Cost Insights plugin (from Spotify)</strong> - Spotify teams are fully
 responsible for their own software, including the cost of the cloud resources
 they use. By making our internal cost insights plugin available as open source
@@ -138,9 +139,6 @@ and the community prioritize what plugins to build.</p>
 Chances are that someone will jump in and help build it.</p>
 <h3><a class="anchor" aria-hidden="true" id="future-work-"></a><a href="#future-work-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Future work 🔮</h3>
 <ul>
-<li><p><strong><a href="https://github.com/spotify/backstage/milestone/19">Backstage platform is stable</a></strong> -
-The platform APIs and features are stable and can be depended on for
-production use. After this plugins will require little to no maintenance.</p></li>
 <li><p><strong>Deploy a product demo at <code>demo.backstage.io</code></strong> - Deploy a typical Backstage
 deployment available publicly so that people can click around and get a feel
 for the product without having to install anything.</p></li>
@@ -155,9 +153,15 @@ solutions. Since Backstage can be used by companies regardless of what cloud
 (or on prem) you are using we are especially keen to get auth support for
 <a href="https://github.com/spotify/backstage/issues/290">AWS</a>,
 <a href="https://github.com/spotify/backstage/issues/348">Azure</a> and others.</p></li>
+<li><p><strong><a href="https://github.com/spotify/backstage/milestone/13">Initial GraphQL API</a></strong> -
+A GraphQL API will open up the rich metadata provided by Backstage in a single
+query. Plugins can easily query this API as well as extend the model where
+needed.</p></li>
 </ul>
 <h3><a class="anchor" aria-hidden="true" id="completed-milestones-"></a><a href="#completed-milestones-" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Completed milestones ✅</h3>
 <ul>
+<li><a href="https://backstage.io/blog/2020/09/23/backstage-cncf-sandbox">Donate Backstage to the CNCF 🎉</a></li>
+<li><a href="https://backstage.io/blog/2020/09/08/announcing-tech-docs">TechDocs v1</a></li>
 <li><a href="https://backstage.io/plugins">Plugin marketplace</a></li>
 <li><a href="https://backstage.io/docs/overview/what-is-backstage">Improved and move documentation to backstage.io</a></li>
 <li><a href="https://backstage.io/blog/2020/06/22/backstage-service-catalog-alpha">Backstage Service Catalog (alpha)</a></li>
