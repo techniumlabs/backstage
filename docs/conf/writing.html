@@ -111,9 +111,10 @@ packages.</p>
 considered, as are files with additional <code>local</code> and environment affixes such as
 <code>development</code>, for example <code>app-config.local.yaml</code>,
 <code>app-config.production.yaml</code>, and <code>app-config.development.local.yaml</code>. Which
-environment config files are loaded is determined by the <code>NODE_ENV</code> environment
-variable. Local configuration files are always loaded, but are meant for local
-development overrides and should typically be <code>.gitignore</code>'d.</p>
+environment config files are loaded is determined by the <code>APP_ENV</code> environment
+variable, or <code>NODE_ENV</code> if it is not set. Local configuration files are always
+loaded, but are meant for local development overrides and should typically be
+<code>.gitignore</code>'d.</p>
 <p>All loaded configuration files are merged together using the following rules:</p>
 <ul>
 <li>Configurations have different priority, higher priority means you replace
