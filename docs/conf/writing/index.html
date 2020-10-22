@@ -103,18 +103,23 @@ reusing deployment artifacts across staging and production environments.</p>
 picked up by the serve tasks of <code>@backstage/cli</code> for local development, and are
 injected by the entrypoint of the nginx container serving the frontend in a
 production build.</p>
-<h2><a class="anchor" aria-hidden="true" id="file-resolution"></a><a href="#file-resolution" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>File Resolution</h2>
+<h2><a class="anchor" aria-hidden="true" id="configuration-files"></a><a href="#configuration-files" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration Files</h2>
 <p>It is possible to have multiple configuration files, both to support different
 environments, but also to define configuration that is local to specific
-packages.</p>
-<p>All <code>app-config.yaml</code> files inside the monorepo root and package root are
-considered, as are files with additional <code>local</code> and environment affixes such as
-<code>development</code>, for example <code>app-config.local.yaml</code>,
-<code>app-config.production.yaml</code>, and <code>app-config.development.local.yaml</code>. Which
-environment config files are loaded is determined by the <code>APP_ENV</code> environment
-variable, or <code>NODE_ENV</code> if it is not set. Local configuration files are always
-loaded, but are meant for local development overrides and should typically be
-<code>.gitignore</code>'d.</p>
+packages. The configuration files to load are selected using a <code>--config &lt;path&gt;</code>
+flag, and it is possible to load any number of files. Paths are relative to the
+working directory of the executed process, for example <code>package/backend</code>. This
+means that to select a config file in the repo root when running the backend,
+you would use <code>--config ../../my-config.yaml</code>.</p>
+<p>If no <code>config</code> flags are specified, the default behavior is to load
+<code>app-config.yaml</code> and, if it exists, <code>app-config.local.yaml</code> from the repo root.
+In the provided project setup, <code>app-config.local.yaml</code> is <code>.gitignore</code>'d, making
+it a good place to add config overrides and secrets for local development.</p>
+<p>Note that if any config flags are provided, the default <code>app-config.yaml</code> files
+are NOT loaded. To include them you need to explicitly include them with a flag,
+for example:</p>
+<pre><code class="hljs">yarn start --<span class="hljs-built_in">config</span> ../../app-<span class="hljs-built_in">config</span>.yaml --<span class="hljs-built_in">config</span> ../../app-<span class="hljs-built_in">config</span>.staging.yaml
+</code></pre>
 <p>All loaded configuration files are merged together using the following rules:</p>
 <ul>
 <li>Configurations have different priority, higher priority means you replace
@@ -129,10 +134,10 @@ order:</p>
 <ul>
 <li>Configuration from the <code>APP_CONFIG_</code> environment variables has the highest
 priority, followed by files.</li>
-<li>Files inside package directories have higher priority than those in the root
-directory.</li>
-<li>Files with environment affixes have higher priority than ones without.</li>
-<li>Files with the <code>local</code> affix have higher priority than ones without.</li>
+<li>Files loaded with config flags are ordered by priority, where the last flag
+has the highest priority.</li>
+<li>If no config flags are provided, <code>app-config.local.yaml</code> has higher priority
+than <code>app-config.yaml</code>.</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="secrets"></a><a href="#secrets" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Secrets</h2>
 <p>Secrets are supported via a special secret keys that are prefixed with <code>$</code>,
@@ -182,7 +187,7 @@ used to point to a specific value inside the file. Supported file extensions are
   <span class="hljs-string">}</span>
 <span class="hljs-string">}</span>
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/conf/reading"><span class="arrow-prev">← </span><span>Reading Backstage Configuration</span></a><a class="docs-next button" href="/docs/conf/defining"><span>Defining Configuration for your Plugin</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#file-format">File Format</a></li><li><a href="#environment-variable-overrides">Environment Variable Overrides</a></li><li><a href="#file-resolution">File Resolution</a></li><li><a href="#secrets">Secrets</a><ul class="toc-headings"><li><a href="#env-secrets">Env Secrets</a></li><li><a href="#file-secrets">File Secrets</a></li><li><a href="#data-file-secrets">Data File Secrets</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Service Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/spotify/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a><a href="https://www.cncf.io/sandbox-projects/">CNCF Sandbox</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://github.com/spotify/backstage">GitHub</a><a class="github-button" href="https://github.com/spotify/backstage" data-icon="octicon-star" data-count-href="/spotify/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><p class="copyright">Copyright © 2020 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/conf/reading"><span class="arrow-prev">← </span><span>Reading Backstage Configuration</span></a><a class="docs-next button" href="/docs/conf/defining"><span>Defining Configuration for your Plugin</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#file-format">File Format</a></li><li><a href="#environment-variable-overrides">Environment Variable Overrides</a></li><li><a href="#configuration-files">Configuration Files</a></li><li><a href="#secrets">Secrets</a><ul class="toc-headings"><li><a href="#env-secrets">Env Secrets</a></li><li><a href="#file-secrets">File Secrets</a></li><li><a href="#data-file-secrets">Data File Secrets</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Service Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/spotify/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a><a href="https://www.cncf.io/sandbox-projects/">CNCF Sandbox</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://github.com/spotify/backstage">GitHub</a><a class="github-button" href="https://github.com/spotify/backstage" data-icon="octicon-star" data-count-href="/spotify/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><p class="copyright">Copyright © 2020 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
