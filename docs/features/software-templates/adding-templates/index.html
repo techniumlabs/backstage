@@ -63,8 +63,8 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/spotify/backstage/edit/master/docs/features/software-templates/adding-templates.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Adding your own Templates</h1></header><article><div><span><p>Templates are stored in the <strong>Service Catalog</strong> under a kind <code>Template</code>. The
-minimum that the template skeleton needs is a <code>template.yaml</code> but it would be
-good to also have some files in there that can be templated in.</p>
+minimum that is needed to define a template is a <code>template.yaml</code> file, but it
+would be good to also have some files in there that can be templated in.</p>
 <p>A simple <code>template.yaml</code> definition might look something like this:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">backstage.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Template</span>
@@ -112,7 +112,7 @@ load from other places, not only will there need to be another preparer, but the
 support to load the location will also need to be added to the Catalog.</p>
 <p>You can add the template files to the catalog through
 <a href="/docs/features/software-catalog/configuration#static-location-configuration">static location configuration</a>,
-for example</p>
+for example:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">catalog:</span>
   <span class="hljs-attr">locations:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">url</span>
@@ -140,10 +140,10 @@ running:</p>
   --location \
   --request POST <span class="hljs-string">'localhost:7000/api/catalog/locations'</span> \
   --header <span class="hljs-string">'Content-Type: application/json'</span> \
-  --data-raw <span class="hljs-string">"{\"type\": \"github\", \"target\": \"https://<span class="hljs-variable">${YOUR GITHUB REPO}</span>blob/master/<span class="hljs-variable">${PATH TO FOLDER}</span>/template.yaml\"}"</span>
+  --data-raw <span class="hljs-string">"{\"type\": \"github\", \"target\": \"https://<span class="hljs-variable">${GITHUB URL}</span>/<span class="hljs-variable">${YOUR GITHUB ORG/REPO}</span>/blob/master/<span class="hljs-variable">${PATH TO FOLDER}</span>/template.yaml\"}"</span>
 </code></pre>
-<p>This should then have added the catalog, and also should now be listed under the
-create page at <a href="http://localhost:3000/create">http://localhost:3000/create</a>.</p>
+<p>This should then have been added the catalog, and be listed under the create
+page at <a href="http://localhost:3000/create">http://localhost:3000/create</a>.</p>
 <p>The <code>type</code> field which is chosen in the request to add the <code>template.yaml</code> to
 the Service Catalog here, will become the <code>PreparerKey</code> which will be used to
 select the <code>Preparer</code> when creating a job.</p>
