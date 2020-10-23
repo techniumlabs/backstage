@@ -74,7 +74,7 @@ Each of these methods is hosted at an endpoint <code>/auth/[provider]/method</co
   <span class="hljs-string">/auth/</span>[provider]<span class="hljs-string">/logout</span> -&gt; logout
 </code></pre>
 <p>For more information on how these methods are used and for which purpose, refer
-to the documentation <a href="/docs/auth/oauth">here</a>.</p>
+to the <a href="/docs/auth/oauth">OAuth documentation</a>.</p>
 <p>For details on the parameters, input and output conditions for each method,
 refer to the type documentation under
 <code>plugins/auth-backend/src/providers/types.ts</code>.</p>
@@ -87,7 +87,7 @@ based mechanisms.</p>
 <p>Currently OAuth is assumed to be the de facto authentication mechanism for
 Backstage based applications.</p>
 <p>Backstage comes with a &quot;batteries-included&quot; set of supported commonly used OAuth
-providers: Okta, Github, Google, Gitlab, and a generic OAuth2 provider.</p>
+providers: Okta, GitHub, Google, GitLab, and a generic OAuth2 provider.</p>
 <p>All of these use the authorization flow of OAuth2 to implement authentication.</p>
 <p>If your authentication provider is any of the above mentioned (except generic
 OAuth2) providers, you can configure them by setting the right variables in

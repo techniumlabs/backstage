@@ -98,7 +98,7 @@ core UI components and libraries for shared activities such as config
 management. [<a href="https://backstage-demo.roadie.io/">live demo</a>]</p>
 <p><img src="../assets/architecture-overview/core-vs-plugin-components-highlighted.png" alt="UI with different components highlighted"></p>
 <p>Each plugin typically makes itself available in the UI on a dedicated URL. For
-example, the lighthouse plugin is registered with the UI on <code>/lighthouse</code>.
+example, the Lighthouse plugin is registered with the UI on <code>/lighthouse</code>.
 [<a href="https://backstage-demo.roadie.io/lighthouse">live demo</a>]</p>
 <p><img src="../assets/architecture-overview/lighthouse-plugin.png" alt="The lighthouse plugin UI"></p>
 <p>The Circle CI plugin is available on <code>/circleci</code>.</p>
@@ -117,7 +117,7 @@ is that file in the Backstage sample app.</p>
 <p>Plugins can be enabled, and passed configuration in <code>apis.ts</code>. For example,
 <a href="https://github.com/spotify/backstage/blob/master/packages/app/src/apis.ts">here</a>
 is that file in the Backstage sample app.</p>
-<p>This is how the lighthouse plugin would be enabled in a typical Backstage
+<p>This is how the Lighthouse plugin would be enabled in a typical Backstage
 application:</p>
 <pre><code class="hljs css language-tsx"><span class="hljs-keyword">import</span> { ApiHolder, ApiRegistry } <span class="hljs-keyword">from</span> <span class="hljs-string">'@backstage/core'</span>;
 <span class="hljs-keyword">import</span> {
@@ -143,7 +143,7 @@ code changes are required.</p>
 </ol>
 <h4><a class="anchor" aria-hidden="true" id="standalone-plugins"></a><a href="#standalone-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Standalone plugins</h4>
 <p>Standalone plugins run entirely in the browser.
-<a href="https://backstage-demo.roadie.io/tech-radar">The tech radar plugin</a>, for
+<a href="https://backstage-demo.roadie.io/tech-radar">The Tech Radar plugin</a>, for
 example, simply renders hard-coded information. It doesn't make any API requests
 to other services.</p>
 <p><img src="../assets/architecture-overview/tech-radar-plugin.png" alt="tech radar plugin ui"></p>
@@ -153,9 +153,9 @@ simple.</p>
 <h4><a class="anchor" aria-hidden="true" id="service-backed-plugins"></a><a href="#service-backed-plugins" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Service backed plugins</h4>
 <p>Service backed plugins make API requests to a service which is within the
 purview of the organisation running Backstage.</p>
-<p>The lighthouse plugin, for example, makes requests to the
+<p>The Lighthouse plugin, for example, makes requests to the
 <a href="https://github.com/spotify/lighthouse-audit-service">lighthouse-audit-service</a>.
-The lighthouse-audit-service is a microservice which runs a copy of Google's
+The <code>lighthouse-audit-service</code> is a microservice which runs a copy of Google's
 <a href="https://github.com/GoogleChrome/lighthouse/">Lighthouse library</a> and stores the
 results in a PostgreSQL database.</p>
 <p>Its architecture looks like this:</p>
@@ -167,10 +167,10 @@ service and renders them in a table for the user.</p>
 <p>Third-party backed plugins are similar to service backed plugins. The main
 difference is that the service which backs the plugin is hosted outside of the
 ecosystem of the company hosting Backstage.</p>
-<p>The Circle CI plugin is an example of a third-party backed plugin. Circle CI is
-a SaaS service which can be used without any knowledge of Backstage. It has an
-API which a Backstage plugin consumes to display content.</p>
-<p>Requests which go to Circle CI from the users browser are passed through a proxy
+<p>The CircleCI plugin is an example of a third-party backed plugin. CircleCI is a
+SaaS service which can be used without any knowledge of Backstage. It has an API
+which a Backstage plugin consumes to display content.</p>
+<p>Requests which go to CircleCI from the users browser are passed through a proxy
 service that Backstage provides. Without this, the requests would be blocked by
 Cross Origin Resource Sharing policies which prevent a browser page served at
 <a href="https://example.com">https://example.com</a> from serving resources hosted at
@@ -193,7 +193,7 @@ separate docker images.</p>
 <ol>
 <li>The frontend container</li>
 <li>The backend container</li>
-<li>The lighthouse audit service container</li>
+<li>The Lighthouse audit service container</li>
 </ol>
 <p><img src="../assets/architecture-overview/containerised.png" alt="Boxes around the architecture to indicate how it is containerised"></p>
 <p>The frontend container can be built with a provided command.</p>
@@ -208,7 +208,7 @@ the UIs <code>dist</code> directory.</p>
 </code></pre>
 <p>This will create a container called <code>example-backend</code>.</p>
 <p>The lighthouse-audit-service container is already publicly available in Docker
-Hub and can be downloaded and ran with</p>
+Hub and can be downloaded and run with</p>
 <pre><code class="hljs css language-bash">docker run spotify/lighthouse-audit-service:latest
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/overview/what-is-backstage"><span class="arrow-prev">← </span><span>What is Backstage?</span></a><a class="docs-next button" href="/docs/overview/roadmap"><span>Project roadmap</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#terminology">Terminology</a></li><li><a href="#overview">Overview</a></li><li><a href="#the-ui">The UI</a></li><li><a href="#plugins-and-plugin-backends">Plugins and plugin backends</a><ul class="toc-headings"><li><a href="#installing-plugins">Installing plugins</a></li><li><a href="#plugin-architecture">Plugin architecture</a></li><li><a href="#third-party-backed-plugins">Third-party backed plugins</a></li></ul></li><li><a href="#databases">Databases</a></li><li><a href="#containerization">Containerization</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><div class="footer-title"><a href="/"><h2 class="footerLogo"></h2></a></div><div><h5>Docs</h5><a href="/docs/overview/what-is-backstage">What is Backstage?</a><a href="/docs/getting-started/">Getting started</a><a href="/docs/features/software-catalog/software-catalog-overview">Service Catalog</a><a href="/docs/plugins/create-a-plugin">Create a Plugin</a><a href="/docs/dls/design">Designing for Backstage</a></div><div><h5>Community</h5><a href="https://discord.gg/MUpMjP2">Support chatroom</a><a href="https://github.com/spotify/backstage/blob/master/CONTRIBUTING.md">Contributing</a><a href="https://mailchi.mp/spotify/backstage-community">Subscribe to our newsletter</a><a href="https://www.cncf.io/sandbox-projects/">CNCF Sandbox</a></div><div><h5>More</h5><a href="https://spotify.github.io/">Open Source @ Spotify</a><a href="https://github.com/spotify/backstage">GitHub</a><a class="github-button" href="https://github.com/spotify/backstage" data-icon="octicon-star" data-count-href="/spotify/backstage/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a><div class="social"><a href="https://twitter.com/SpotifyEng" class="twitter-follow-button">Follow @SpotifyEng</a></div></div></section><p class="copyright">Copyright © 2020 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</p></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script><script>
