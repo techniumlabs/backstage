@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Architecture overview · Backstage</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Documentation on Architecture overview"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Architecture overview · Backstage"/><meta property="og:type" content="website"/><meta property="og:url" content="https://backstage.io/"/><meta property="og:description" content="Documentation on Architecture overview"/><meta property="og:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><link rel="shortcut icon" href="/img/favicon.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"/><link rel="alternate" type="application/atom+xml" href="https://backstage.io/blog/atom.xml" title="Backstage Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://backstage.io/blog/feed.xml" title="Backstage Blog RSS Feed"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Architecture overview · Backstage</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Documentation on Architecture overview"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Architecture overview · Backstage"/><meta property="og:type" content="website"/><meta property="og:url" content="https://backstage.io/"/><meta property="og:description" content="Documentation on Architecture overview"/><meta property="og:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"/><link rel="alternate" type="application/atom+xml" href="https://backstage.io/blog/atom.xml" title="Backstage Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://backstage.io/blog/feed.xml" title="Backstage Blog RSS Feed"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -80,7 +80,7 @@ into a single unified developer experience.</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
 <p>The following diagram shows how Backstage might look when deployed inside a
-company which uses the Tech Radar plugin, the Lighthouse plugin, the Circle CI
+company which uses the Tech Radar plugin, the Lighthouse plugin, the CircleCI
 plugin and the service catalog.</p>
 <p>There are 3 main components in this architecture:</p>
 <ol>
@@ -101,8 +101,8 @@ management. [<a href="https://backstage-demo.roadie.io/">live demo</a>]</p>
 example, the Lighthouse plugin is registered with the UI on <code>/lighthouse</code>.
 [<a href="https://backstage-demo.roadie.io/lighthouse">live demo</a>]</p>
 <p><img src="../assets/architecture-overview/lighthouse-plugin.png" alt="The lighthouse plugin UI"></p>
-<p>The Circle CI plugin is available on <code>/circleci</code>.</p>
-<p><img src="../assets/architecture-overview/circle-ci.png" alt="Circle CI Plugin UI"></p>
+<p>The CircleCI plugin is available on <code>/circleci</code>.</p>
+<p><img src="../assets/architecture-overview/circle-ci.png" alt="CircleCI Plugin UI"></p>
 <h2><a class="anchor" aria-hidden="true" id="plugins-and-plugin-backends"></a><a href="#plugins-and-plugin-backends" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Plugins and plugin backends</h2>
 <p>Each plugin is a client side application which mounts itself on the UI. Plugins
 are written in TypeScript or JavaScript. They each live in their own directory
@@ -175,21 +175,23 @@ service that Backstage provides. Without this, the requests would be blocked by
 Cross Origin Resource Sharing policies which prevent a browser page served at
 <a href="https://example.com">https://example.com</a> from serving resources hosted at
 <a href="https://circleci.com">https://circleci.com</a>.</p>
-<p><img src="../assets/architecture-overview/circle-ci-plugin-architecture.png" alt="CircleCi plugin talking to proxy talking to SaaS Circle CI"></p>
+<p><img src="../assets/architecture-overview/circle-ci-plugin-architecture.png" alt="CircleCI plugin talking to proxy talking to SaaS Circle CI"></p>
 <h2><a class="anchor" aria-hidden="true" id="databases"></a><a href="#databases" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Databases</h2>
-<p>As we have seen, both the lighthouse-audit-service and catalog-backend require a
-database to work with.</p>
-<p>At the time of writing, the lighthouse-audit-service requires PostgreSQL to work
-with. The service catalog backend uses an in-memory Sqlite3 instance. This is a
-development oriented setup and there are plans to support other databases in the
-future.</p>
-<p>To learn more about the future of databases and Backstage, see the following two
+<p>As we have seen, both the <code>lighthouse-audit-service</code> and <code>catalog-backend</code>
+require a database to work with.</p>
+<p>At the time of writing, the <code>lighthouse-audit-service</code> requires PostgreSQL to
+work with. The service catalog backend uses an in-memory Sqlite3 instance. This
+is a development-oriented setup and there are plans to support other databases
+in the future.</p>
+<p>To learn more about the future of databases and Backstage, see the following
 GitHub issues.</p>
-<p><a href="https://github.com/spotify/backstage/issues/1598">Knex + Plugins (Multiple vs Single Database) · Issue #1598 · spotify/backstage</a></p>
-<p><a href="https://github.com/spotify/backstage/pull/1527#discussion_r450374145">Update migrations to support postgres by dariddler · Pull Request #1527 · spotify/backstage</a></p>
+<ul>
+<li><a href="https://github.com/spotify/backstage/issues/1598">Knex + Plugins (Multiple vs Single Database) · Issue #1598 · spotify/backstage</a></li>
+<li><a href="https://github.com/spotify/backstage/pull/1527#discussion_r450374145">Update migrations to support postgres by dariddler · Pull Request #1527 · spotify/backstage</a></li>
+</ul>
 <h2><a class="anchor" aria-hidden="true" id="containerization"></a><a href="#containerization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Containerization</h2>
 <p>The example Backstage architecture shown above would Dockerize into three
-separate docker images.</p>
+separate Docker images.</p>
 <ol>
 <li>The frontend container</li>
 <li>The backend container</li>

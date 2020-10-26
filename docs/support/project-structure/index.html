@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Backstage Project Structure · Backstage</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Backstage is a complex project, and the GitHub repository contains many"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Backstage Project Structure · Backstage"/><meta property="og:type" content="website"/><meta property="og:url" content="https://backstage.io/"/><meta property="og:description" content="Backstage is a complex project, and the GitHub repository contains many"/><meta property="og:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><link rel="shortcut icon" href="/img/favicon.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"/><link rel="alternate" type="application/atom+xml" href="https://backstage.io/blog/atom.xml" title="Backstage Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://backstage.io/blog/feed.xml" title="Backstage Blog RSS Feed"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Backstage Project Structure · Backstage</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Backstage is a complex project, and the GitHub repository contains many"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Backstage Project Structure · Backstage"/><meta property="og:type" content="website"/><meta property="og:url" content="https://backstage.io/"/><meta property="og:description" content="Backstage is a complex project, and the GitHub repository contains many"/><meta property="og:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://backstage.io/logo_assets/png/Backstage_Identity_Assets_Artwork_RGB_04_Icon_Teal.png"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"/><link rel="alternate" type="application/atom+xml" href="https://backstage.io/blog/atom.xml" title="Backstage Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://backstage.io/blog/feed.xml" title="Backstage Blog RSS Feed"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -91,10 +91,10 @@ this folder to be moved in the future.</p></li>
 Collection of examples or resources provided by the community. We really
 appreciate contributions in here and encourage them being kept up to date.</p></li>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/docs"><code>docs/</code></a> - This is
-where we keep all of our documentation markdown files. These ends up on
-<a href="http://backstage.io/docs">http://backstage.io/docs</a>. Just keep in mind that changes to
-<a href="https://github.com/spotify/backstage/blob/master/microsite/sidebars.json">this</a>
-file also needs to be updated.</p></li>
+where we keep all of our documentation Markdown files. These ends up on
+<a href="http://backstage.io/docs">http://backstage.io/docs</a>. Just keep in mind that changes to the
+<a href="https://github.com/spotify/backstage/blob/master/microsite/sidebars.json"><code>sidebars.json</code></a>
+file may be needed as sections are added/removed.</p></li>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/.editorconfig"><code>.editorconfig</code></a> -
 A configuration file used by most common code editors.</p></li>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/.imgbotconfig"><code>.imgbotconfig</code></a> -
@@ -147,8 +147,6 @@ This package mainly handles path resolving. It is a separate package to reduce
 bugs in <a href="https://github.com/spotify/backstage/tree/master/packages/cli">cli</a>.
 We also want as few dependencies as possible to reduce download time when
 running the cli which is another reason this is a separate package.</p></li>
-</ul>
-<ul>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/packages/config"><code>config/</code></a> -
 The way we read configuration data. This package can take a bunch of config
 objects and merge them together.
@@ -159,16 +157,12 @@ This package is used to read config objects. It does not know how to merge,
 but only reads files and passes them on to the config. As this part is only
 used by the backend, we chose to separate <code>config</code> and <code>config-loader</code> into
 two different packages.</p></li>
-</ul>
-<ul>
-<li><a href="https://github.com/spotify/backstage/tree/master/packages/core"><code>core/</code></a> -
+<li><p><a href="https://github.com/spotify/backstage/tree/master/packages/core"><code>core/</code></a> -
 This package contains our visual React components, some of which you can find
 in
 <a href="https://backstage.io/storybook/?path=/story/plugins-examples--plugin-with-data">plugin examples</a>.
 Apart from that it re-exports everything from [<code>core-api</code>] so that users only
-need to rely on one package.</li>
-</ul>
-<ul>
+need to rely on one package.</p></li>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/packages/core-api"><code>core-api/</code></a> -
 This package contains APIs and definitions of such. It is it's own package
 because we needed to split our <code>test-utils</code> package. It's an implementation
@@ -183,13 +177,9 @@ Backstage App.</p></li>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/packages/create-app"><code>create-app/</code></a> -
 An CLI to specifically scaffold a new Backstage App. It does so by using a
 <a href="https://github.com/spotify/backstage/tree/master/packages/create-app/templates/default-app">template</a>.</p></li>
-</ul>
-<ul>
-<li><a href="https://github.com/spotify/backstage/tree/master/packages/dev-utils"><code>dev-utils/</code></a> -
+<li><p><a href="https://github.com/spotify/backstage/tree/master/packages/dev-utils"><code>dev-utils/</code></a> -
 Helps you setup a plugin for isolated development so that it can be served
-separately.</li>
-</ul>
-<ul>
+separately.</p></li>
 <li><p><a href="https://github.com/spotify/backstage/tree/master/packages/docgen"><code>docgen/</code></a> -
 Uses the
 <a href="https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API">Typescript Compiler API</a>
