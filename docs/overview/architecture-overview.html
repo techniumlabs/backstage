@@ -170,7 +170,7 @@ ecosystem of the company hosting Backstage.</p>
 <p>The CircleCI plugin is an example of a third-party backed plugin. CircleCI is a
 SaaS service which can be used without any knowledge of Backstage. It has an API
 which a Backstage plugin consumes to display content.</p>
-<p>Requests which go to CircleCI from the users browser are passed through a proxy
+<p>Requests going to CircleCI from the user's browser are passed through a proxy
 service that Backstage provides. Without this, the requests would be blocked by
 Cross Origin Resource Sharing policies which prevent a browser page served at
 <a href="https://example.com">https://example.com</a> from serving resources hosted at
@@ -179,16 +179,17 @@ Cross Origin Resource Sharing policies which prevent a browser page served at
 <h2><a class="anchor" aria-hidden="true" id="databases"></a><a href="#databases" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Databases</h2>
 <p>As we have seen, both the <code>lighthouse-audit-service</code> and <code>catalog-backend</code>
 require a database to work with.</p>
-<p>At the time of writing, the <code>lighthouse-audit-service</code> requires PostgreSQL to
-work with. The service catalog backend uses an in-memory Sqlite3 instance. This
-is a development-oriented setup and there are plans to support other databases
-in the future.</p>
-<p>To learn more about the future of databases and Backstage, see the following
-GitHub issues.</p>
-<ul>
-<li><a href="https://github.com/backstage/backstage/issues/1598">Knex + Plugins (Multiple vs Single Database) · Issue #1598 · backstage/backstage</a></li>
-<li><a href="https://github.com/backstage/backstage/pull/1527#discussion_r450374145">Update migrations to support postgres by dariddler · Pull Request #1527 · backstage/backstage</a></li>
-</ul>
+<p>The Backstage backend and its builtin plugins are based on the
+<a href="http://knexjs.org/">Knex</a> library, and set up a separate logical database per
+plugin. This gives great isolation and lets them perform migrations and evolve
+separate from each other.</p>
+<p>The Knex library supports a multitude of databases, but Backstage is at the time
+of writing tested primarily against two of them: SQLite, which is mainly used as
+an in-memory mock/test database, and PostgreSQL, which is the preferred
+production database. Other databases such as the MySQL variants are reported to
+work but
+<a href="https://github.com/backstage/backstage/issues/2460">aren't tested as fully</a>
+yet.</p>
 <h2><a class="anchor" aria-hidden="true" id="containerization"></a><a href="#containerization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Containerization</h2>
 <p>The example Backstage architecture shown above would Dockerize into three
 separate Docker images.</p>
