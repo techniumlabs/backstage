@@ -103,7 +103,7 @@ GitHub Enterprise, GitLab, ...).</p>
 <strong>REGISTER EXISTING COMPONENT</strong> button:</p>
 <p><img src="../../assets/software-catalog/bsc-register-1.png" alt=""></p>
 <p>Backstage expects the full URL to the YAML in your source control. Example:</p>
-<pre><code class="hljs css language-bash">https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/artist-lookup-component.yaml
+<pre><code class="hljs css language-bash">https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/components/artist-lookup-component.yaml
 </code></pre>
 <p><em>More examples can be found
 <a href="https://github.com/backstage/backstage/tree/master/packages/catalog-model/examples">here</a>.</em></p>
@@ -123,7 +123,7 @@ above example can be added using the following configuration:</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">catalog:</span>
   <span class="hljs-attr">locations:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-attr">type:</span> <span class="hljs-string">url</span>
-      <span class="hljs-attr">target:</span> <span class="hljs-string">https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/artist-lookup-component.yaml</span>
+      <span class="hljs-attr">target:</span> <span class="hljs-string">https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/components/artist-lookup-component.yaml</span>
 </code></pre>
 <p>More information about catalog configuration can be found
 <a href="/docs/features/software-catalog/configuration">here</a>.</p>
