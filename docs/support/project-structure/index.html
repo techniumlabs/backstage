@@ -128,6 +128,11 @@ frontend (<code>app</code>) can use.</p></li>
 <li><p><a href="https://github.com/backstage/backstage/tree/master/packages/backend-common"><code>backend-common/</code></a> -
 There are no &quot;core&quot; packages in the backend. Instead we have <code>backend-common</code>
 which contains helper middleware and other utils.</p></li>
+<li><p><a href="https://github.com/backstage/backstage/tree/master/packages/catalog-client"><code>catalog-client</code></a> -
+An isomorphic client to interact with the Software Catalog. Backend plugins
+can use the package directly. Frontend plugins can use the client by using
+<code>@backstage/plugin-catalog</code> in combination with <code>useApi</code> and the
+<code>catalogApiRef</code>.</p></li>
 <li><p><a href="https://github.com/backstage/backstage/tree/master/packages/catalog-model"><code>catalog-model/</code></a> -
 You can consider this to be a library for working with the catalog of sorts.
 It contains the definition of an
