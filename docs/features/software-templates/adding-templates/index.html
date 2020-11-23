@@ -107,6 +107,9 @@ would be good to also have some files in there that can be templated in.</p>
 contains more information about the required fields.</p>
 <p>Once we have a <code>template.yaml</code> ready, we can then add it to the service catalog
 for use by the scaffolder.</p>
+<p><em>NOTE</em>: When the <code>publish</code> step is completed, it is currently assumed by the
+scaffolder that the final repository should contain a <code>catalog-info.yaml</code> in
+order to register this with the Catalog in Backstage.</p>
 <p>Currently the catalog supports loading definitions from GitHub + Local Files. To
 load from other places, not only will there need to be another preparer, but the
 support to load the location will also need to be added to the Catalog.</p>

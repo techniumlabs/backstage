@@ -93,7 +93,7 @@ software catalog API.</p>
   <span class="hljs-string">"kind"</span>: <span class="hljs-string">"Component"</span>,
   <span class="hljs-string">"metadata"</span>: {
     <span class="hljs-string">"annotations"</span>: {
-      <span class="hljs-string">"backstage.io/managed-by-location"</span>: <span class="hljs-string">"file:/tmp/component-info.yaml"</span>,
+      <span class="hljs-string">"backstage.io/managed-by-location"</span>: <span class="hljs-string">"file:/tmp/catalog-info.yaml"</span>,
       <span class="hljs-string">"example.com/service-discovery"</span>: <span class="hljs-string">"artistweb"</span>,
       <span class="hljs-string">"circleci.com/project-slug"</span>: <span class="hljs-string">"github/example-org/artist-website"</span>
     },
@@ -537,6 +537,9 @@ the Backstage interface.</p>
 <a href="https://swagger.io/specification/">OpenAPI</a> version 2 or version 3 spec.</li>
 <li><code>asyncapi</code> - An API definition based on the
 <a href="https://www.asyncapi.com/docs/specifications/latest/">AsyncAPI</a> spec.</li>
+<li><code>graphql</code> - An API definition based on
+<a href="https://spec.graphql.org/">GraphQL schemas</a> for consuming
+<a href="https://graphql.org/">GraphQL</a> based APIs.</li>
 <li><code>grpc</code> - An API definition based on
 <a href="https://developers.google.com/protocol-buffers">Protocol Buffers</a> to use with
 <a href="https://grpc.io/">gRPC</a>.</li>
@@ -625,6 +628,10 @@ namespace as the user. Only <code>Group</code> entities may be referenced. Most 
 this field points to a group in the same namespace, so in those cases it is
 sufficient to enter only the <code>metadata.name</code> field of that group.</p>
 <h3><a class="anchor" aria-hidden="true" id="specancestors-required"></a><a href="#specancestors-required" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>spec.ancestors</code> [required]</h3>
+<p><strong>NOTE</strong>: This field was marked for deprecation on Nov 22nd, 2020. It will be
+removed entirely from the model on Dec 6th, 2020 in the repository and will not
+be present in released packages following the next release after that. Please
+update your code to not consume this field before the removal date.</p>
 <p>The recursive list of parents up the hierarchy, by stepping through parents one
 by one. The list must be present, but may be empty if <code>parent</code> is not present.
 The first entry in the list is equal to <code>parent</code>, and then the following ones
@@ -647,6 +654,10 @@ namespace as the user. Only <code>Group</code> entities may be referenced. Most 
 these entries point to groups in the same namespace, so in those cases it is
 sufficient to enter only the <code>metadata.name</code> field of those groups.</p>
 <h3><a class="anchor" aria-hidden="true" id="specdescendants-required"></a><a href="#specdescendants-required" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>spec.descendants</code> [required]</h3>
+<p><strong>NOTE</strong>: This field was marked for deprecation on Nov 22nd, 2020. It will be
+removed entirely from the model on Dec 6th, 2020 in the repository and will not
+be present in released packages following the next release after that. Please
+update your code to not consume this field before the removal date.</p>
 <p>The immediate and recursive child groups of this group in the hierarchy
 (children, and children's children, etc.). The list must be present, but may be
 empty if there are no child groups. The items are not guaranteed to be ordered
