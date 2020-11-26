@@ -102,7 +102,7 @@ All strings are case insensitive.</p>
   <span class="hljs-attr">type:</span> <span class="hljs-string">service</span>
   <span class="hljs-attr">lifecycle:</span> <span class="hljs-string">experimental</span>
   <span class="hljs-attr">owner:</span> <span class="hljs-string">group:pet-managers</span>
-  <span class="hljs-attr">implementsApis:</span>
+  <span class="hljs-attr">providesApis:</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">petstore</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">internal/streetlights</span>
     <span class="hljs-bullet">-</span> <span class="hljs-string">hello-world</span>
@@ -115,7 +115,7 @@ the reference, so the end result is that we expect to find another entity in the
 catalog that is of kind <code>Group</code>, namespace <code>default</code> (which, actually, also can
 be left out in its own yaml file because that's the default value there too),
 and name <code>pet-managers</code>.</p>
-<p>The entries in <code>implementsApis</code> are also references. In this case, none of them
+<p>The entries in <code>providesApis</code> are also references. In this case, none of them
 needs to specify a kind since we know from the context that that's the only kind
 that's supported here. The second entry specifies a namespace but the other ones
 don't, and in this context, the default is to refer to the same namespace as the
