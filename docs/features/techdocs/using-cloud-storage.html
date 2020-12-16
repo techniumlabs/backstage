@@ -87,8 +87,8 @@ for the latest instructions on the following steps involving GCP.</p>
   <span class="hljs-attr">publisher:</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">'googleGcs'</span>
   <span class="hljs-attr">googleGcs:</span>
-    <span class="hljs-attr">projectId:</span> <span class="hljs-string">'gcp-project-id
-</span></code></pre>
+    <span class="hljs-attr">projectId:</span> <span class="hljs-string">'gcp-project-id'</span>
+</code></pre>
 <p><strong>3. Service account API key</strong></p>
 <p>Create a new Service Account and a key associated with it. In roles of the
 service account, use &quot;Storage Admin&quot;.</p>
@@ -113,7 +113,7 @@ server and/or your local development server and set it in the app config
 <p>Create a dedicated bucket for TechDocs sites. techdocs-backend will publish
 documentation to this bucket. TechDocs will fetch files from here to serve
 documentation in Backstage.</p>
-<p>Set the name of the bucket to `techdocs.publisher</p>
+<p>Set the name of the bucket to <code>techdocs.publisher.googleGcs.bucketName</code>.</p>
 <pre><code class="hljs css language-yaml"><span class="hljs-attr">techdocs:</span>
   <span class="hljs-attr">publisher:</span>
     <span class="hljs-attr">type:</span> <span class="hljs-string">'googleGcs'</span>
