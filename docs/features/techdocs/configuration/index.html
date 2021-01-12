@@ -109,15 +109,14 @@ configuration options for TechDocs.</p>
     <span class="hljs-comment"># Required when techdocs.publisher.type is set to 'googleGcs'. Skip otherwise.</span>
 
     <span class="hljs-attr">googleGcs:</span>
-      <span class="hljs-comment"># An API key is required to write to a storage bucket.</span>
+      <span class="hljs-comment"># (Required) Cloud Storage Bucket Name</span>
+      <span class="hljs-attr">bucketName:</span> <span class="hljs-string">'techdocs-storage'</span>
+
+      <span class="hljs-comment"># (Optional) An API key is required to write to a storage bucket.</span>
+      <span class="hljs-comment"># If missing, GOOGLE_APPLICATION_CREDENTIALS environment variable will be used.</span>
+      <span class="hljs-comment"># https://cloud.google.com/docs/authentication/production</span>
       <span class="hljs-attr">credentials:</span>
         <span class="hljs-string">$file:</span> <span class="hljs-string">'/path/to/google_application_credentials.json'</span>
-
-      <span class="hljs-comment"># Your GCP Project ID where the Cloud Storage Bucket is hosted.</span>
-      <span class="hljs-attr">projectId:</span> <span class="hljs-string">'gcp-project-id'</span>
-
-      <span class="hljs-comment"># Cloud Storage Bucket Name</span>
-      <span class="hljs-attr">bucketName:</span> <span class="hljs-string">'techdocs-storage'</span>
 
     <span class="hljs-comment"># Required when techdocs.publisher.type is set to 'awsS3'. Skip otherwise.</span>
 
