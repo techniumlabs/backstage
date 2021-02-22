@@ -198,6 +198,23 @@ environment variables and the <code>~/.aws/credentials</code> config file.</p>
 </code></pre>
 <p>Refer to the
 <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-your-credentials.html">official AWS documentation for obtaining the credentials</a>.</p>
+<p><strong>3c. Authentication using an assumed role</strong> Users with multiple AWS accounts
+may want to use a role for S3 storage that is in a different AWS account. Using
+the <code>roleArn</code> parameter as seen below, you can instruct the TechDocs publisher
+to assume a role before accessing S3.</p>
+<pre><code class="hljs css language-yaml"><span class="hljs-attr">techdocs:</span>
+  <span class="hljs-attr">publisher:</span>
+    <span class="hljs-attr">type:</span> <span class="hljs-string">'awsS3'</span>
+    <span class="hljs-attr">awsS3:</span>
+      <span class="hljs-attr">bucketName:</span> <span class="hljs-string">'name-of-techdocs-storage-bucket'</span>
+      <span class="hljs-attr">region:</span>
+        <span class="hljs-string">$env:</span> <span class="hljs-string">AWS_REGION</span>
+      <span class="hljs-attr">credentials:</span>
+        <span class="hljs-attr">roleArn:</span> <span class="hljs-string">arn:aws:iam::123456789012:role/my-backstage-role</span>
+</code></pre>
+<p>Note: Assuming a role requires that primary credentials are already configured
+at <code>AWS.config.credentials</code>. Read more about
+<a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">assuming roles in AWS</a>.</p>
 <p><strong>4. That's it!</strong></p>
 <p>Your Backstage app is now ready to use AWS S3 for TechDocs, to store and read
 the static generated documentation files. When you start the backend of the app,
