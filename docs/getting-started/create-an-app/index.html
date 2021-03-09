@@ -141,17 +141,16 @@ example <a href="https://www.python.org/downloads/">here</a> to install it.</p>
 <h2><a class="anchor" aria-hidden="true" id="run-the-app"></a><a href="#run-the-app" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Run the app</h2>
 <p>When the installation is complete you can open the app folder and start the app.</p>
 <pre><code class="hljs css language-bash"><span class="hljs-built_in">cd</span> my-backstage-app
-yarn start
+yarn dev
 </code></pre>
-<p><em>When <code>yarn start</code> is ready it should open up a browser window displaying your
-app, if not you can navigate to <code>http://localhost:3000</code>.</em></p>
-<p>In most cases you will want to start the backend as well, as it is required for
-the catalog to work, along with many other plugins.</p>
-<p>To start the backend, open a separate terminal session and run the following in
-the root directory:</p>
-<pre><code class="hljs css language-bash">yarn workspace backend start
-</code></pre>
+<p>The <code>yarn dev</code> command will run both the frontend and backend as separate
+processes (named <code>[0]</code> and <code>[1]</code>) in the same window. When the command finishes
+running, it should open up a browser window displaying your app. If not, you can
+open a browser and directly navigate to the frontend at <code>http://localhost:3000</code>.</p>
 <p>Now you're free to hack away on your own Backstage installation!</p>
+<p>As you get more experienced with the app, in future you can run just the
+frontend with <code>yarn start</code> in one window, and the backend with
+<code>yarn start-backend</code> in a different window.</p>
 <h2><a class="anchor" aria-hidden="true" id="linking-in-local-backstage-packages"></a><a href="#linking-in-local-backstage-packages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Linking in local Backstage packages</h2>
 <p>It can often be useful to try out changes to the packages in the main Backstage
 repo within your own app. For example if you want to make modifications to
@@ -170,7 +169,7 @@ globs. For example:</p>
 </code></pre>
 <p>With this in place you can now modify the <code>@backstage/core</code> package within the
 main repo, and have those changes be reflected and tested in your app. Simply
-run your app using <code>yarn start</code> as normal.</p>
+run your app using <code>yarn dev</code> (or <code>yarn start</code> for just frontend) as normal.</p>
 <p>Note that for backend packages you need to make sure that linked packages are
 not dependencies of any non-linked package. If you for example want to work on
 <code>@backstage/backend-common</code>, you need to also link in other backend plugins and
